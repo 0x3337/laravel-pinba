@@ -1,6 +1,6 @@
 {
     "name": "chocofamilyme/laravel-pinba",
-    "description": "Integrates pinba + pinboard with Laravel",
+    "description": "Integrates pinba with Laravel",
     "keywords": ["laravel", "pinba", "profiler", "debug"],
     "type": "library",
     "license": "BSD-3-Clause",
