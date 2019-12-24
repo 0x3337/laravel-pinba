@@ -29,7 +29,7 @@ class PinbaDestination implements ProfilerInterface
         }
 
         if ($servername = config('pinba.pinba_servername')) {
-            pinba_hostname_set($servername);
+            pinba_server_name_set($servername);
         }
 
         if ($schema = config('pinba.pinba_schema')) {
