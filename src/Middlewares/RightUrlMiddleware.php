@@ -18,7 +18,7 @@ class RightUrlMiddleware
     public function handle($request, Closure $next)
     {
         $return = $next($request);
-        Pinba::setScriptName($request->getPathInfo());
+        Pinba::setScriptName($request->route()->uri);
         return $return;
     }
 }
