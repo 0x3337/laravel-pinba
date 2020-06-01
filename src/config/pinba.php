@@ -22,7 +22,7 @@ return [
     |
     */
 
-    'pinba_hostname' => env('PINBA_HOSTNAME', null),
+    'pinba_hostname' => env('PINBA_HOSTNAME', gethostname()),
 
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ return [
     |
     */
 
-    'pinba_servername' => env('PINBA_SERVERNAME', null),
+    'pinba_servername' => config('app.name'),
 
 
     /*
