@@ -4,21 +4,31 @@ namespace Chocofamilyme\LaravelPinba\Middlewares;
 
 use Chocofamilyme\LaravelPinba\Facades\Pinba;
 use Closure;
+use Illuminate\Http\Request;
 
 class RightUrlMiddleware
 {
-    const UNKNOWN_SCRIPT_NAME = '<unknown>';
+    private const UNKNOWN_SCRIPT_NAME = '<unknown>';
+
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Closure $next
+     * @param Request $request
+     * @param Closure $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
         $return = $next($request);
-        Pinba::setScriptName($request->route()->uri);
+
+        $uri = self::UNKNOWN_SCRIPT_NAME;
+        if ($route = $request->route()) {
+            $uri = is_string($route) ? $route : $route->uri;
+        }
+
+        Pinba::setScriptName($uri);
+
         return $return;
     }
 }

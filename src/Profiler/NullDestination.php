@@ -50,7 +50,7 @@ class NullDestination implements ProfilerInterface
      *
      * @return array
      */
-    public function getTimers()
+    public function getTimers(): array
     {
         return [];
     }
@@ -61,7 +61,7 @@ class NullDestination implements ProfilerInterface
      * @param string|null $scriptName
      * @param int|null $flag
      */
-    public function flush(?string $scriptName = null, ?int $flag = null): void
+    public function flush(string $scriptName = null, ?int $flag = null): void
     {
     }
 }

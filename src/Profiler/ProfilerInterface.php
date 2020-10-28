@@ -41,7 +41,7 @@ interface ProfilerInterface
      *
      * @return array
      */
-    public function getTimers();
+    public function getTimers(): array;
 
     /**
      * Useful when you need to send request data to the server immediately (for long running scripts)
@@ -49,5 +49,5 @@ interface ProfilerInterface
      * @param string|null $scriptName
      * @param int|null $flag
      */
-    public function flush(?string $scriptName = null, ?int $flag = null): void;
+    public function flush(string $scriptName = null, ?int $flag = null): void;
 }
