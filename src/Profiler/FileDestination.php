@@ -88,10 +88,10 @@ class FileDestination implements ProfilerInterface
     /**
      * Useful when you need to send request data to the server immediately (for long running scripts)
      *
-     * @param string|null $scriptName
+     * @param string $scriptName
      * @param int|null    $flag
      */
-    public function flush(string $scriptName = null, ?int $flag = null): void
+    public function flush(string $scriptName, ?int $flag = null): void
     {
         $this->setScriptName($scriptName);
         $this->stopAllTimers();

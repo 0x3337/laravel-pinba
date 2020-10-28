@@ -4,6 +4,9 @@ namespace Chocofamilyme\LaravelPinba\Profiler;
 
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @psalm-suppress UndefinedFunction
+ */
 class PinbaDestination implements ProfilerInterface
 {
     /**
@@ -105,7 +108,7 @@ class PinbaDestination implements ProfilerInterface
      *
      * @return array
      */
-    public function getTimers()
+    public function getTimers(): array
     {
         return $this->timers;
     }
@@ -113,10 +116,10 @@ class PinbaDestination implements ProfilerInterface
     /**
      * Useful when you need to send request data to the server immediately (for long running scripts)
      *
-     * @param string|null $scriptName
+     * @param string $scriptName
      * @param int|null $flag
      */
-    public function flush(string $scriptName = null, ?int $flag = null): void
+    public function flush(string $scriptName, ?int $flag = null): void
     {
         if (null === $flag) {
             $flag = PINBA_FLUSH_ONLY_STOPPED_TIMERS;
