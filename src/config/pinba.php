@@ -1,5 +1,7 @@
 <?php
+
 /** @psalm-suppress UndefinedFunction */
+
 return [
 
     /*
