@@ -2,14 +2,11 @@
 
 namespace Chocofamilyme\LaravelPinba\Profiler;
 
-use Log;
+use Illuminate\Support\Facades\Log;
 
 class PinbaDestination implements ProfilerInterface
 {
-    /**
-     * @var array
-     */
-    private $timers = [];
+    private array $timers = [];
 
     /**
      * PinbaDestination constructor.
@@ -21,6 +18,8 @@ class PinbaDestination implements ProfilerInterface
 
     /**
      * Initialize pinba with some configuration
+     *
+     * @psalm-suppress UndefinedFunction
      */
     protected function initializePinba()
     {
@@ -45,14 +44,15 @@ class PinbaDestination implements ProfilerInterface
      * @param string $method
      * @param string $category
      *
+     * @psalm-suppress UndefinedFunction
      * @return int It's the timerId
      */
     public function startTimer(string $group, string $type, string $method, string $category): int
     {
         $tags = [
-            'group' => $group,
-            'type' => $type,
-            'method' => $method,
+            'group'    => $group,
+            'type'     => $type,
+            'method'   => $method,
             'category' => $category,
         ];
 
@@ -65,6 +65,8 @@ class PinbaDestination implements ProfilerInterface
 
     /**
      * Stop the timer by timerId
+     *
+     * @psalm-suppress UndefinedFunction
      *
      * @param int $timerId
      */
@@ -80,6 +82,8 @@ class PinbaDestination implements ProfilerInterface
 
     /**
      * Stop all timers
+     *
+     * @psalm-suppress UndefinedFunction
      */
     public function stopAllTimers(): void
     {
@@ -92,6 +96,8 @@ class PinbaDestination implements ProfilerInterface
      * is served by single script. With this method you can rewrite it
      *
      * @param string $url
+     *
+     * @psalm-suppress UndefinedFunction
      */
     public function setScriptName(string $url): void
     {
@@ -103,7 +109,7 @@ class PinbaDestination implements ProfilerInterface
      *
      * @return array
      */
-    public function getTimers()
+    public function getTimers(): array
     {
         return $this->timers;
     }
@@ -111,11 +117,18 @@ class PinbaDestination implements ProfilerInterface
     /**
      * Useful when you need to send request data to the server immediately (for long running scripts)
      *
-     * @param string|null $scriptName
+     * @param string   $scriptName
      * @param int|null $flag
+     *
+     * @psalm-suppress UndefinedFunction
+     * @psalm-suppress UndefinedConstant
      */
-    public function flush(?string $scriptName = null, ?int $flag = null): void
+    public function flush(string $scriptName, ?int $flag = null): void
     {
+        if (null === $flag) {
+            $flag = PINBA_FLUSH_ONLY_STOPPED_TIMERS;
+        }
+
         pinba_flush($scriptName, $flag);
     }
 }

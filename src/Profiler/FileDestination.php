@@ -2,14 +2,11 @@
 
 namespace Chocofamilyme\LaravelPinba\Profiler;
 
-use Log;
+use Illuminate\Support\Facades\Log;
 
 class FileDestination implements ProfilerInterface
 {
-    /**
-     * @var array
-     */
-    private $timers = [];
+    private array $timers = [];
 
     /**
      * Creates a timer which should be stopped somewhere
@@ -24,9 +21,9 @@ class FileDestination implements ProfilerInterface
     public function startTimer(string $group, string $type, string $method, string $category): int
     {
         $tags = [
-            'group' => $group,
-            'type' => $type,
-            'method' => $method,
+            'group'    => $group,
+            'type'     => $type,
+            'method'   => $method,
             'category' => $category,
         ];
 
@@ -34,7 +31,7 @@ class FileDestination implements ProfilerInterface
 
         $this->timers[$timerId] = [
             'startTime' => microtime(true),
-            'tags' => $tags,
+            'tags'      => $tags,
         ];
 
         return $timerId;
@@ -48,7 +45,7 @@ class FileDestination implements ProfilerInterface
     public function stopTimer(int $timerId): void
     {
         if (isset($this->timers[$timerId])) {
-            $stopTime = microtime(true);
+            $stopTime       = microtime(true);
             $timeDifference = $stopTime - $this->timers[$timerId]['startTime'];
             Log::info('Timer ' . print_r($this->timers[$timerId]['tags'], true) . ' : ' . $timeDifference . ' секунд');
             unset($this->timers[$timerId]);
@@ -83,7 +80,7 @@ class FileDestination implements ProfilerInterface
      *
      * @return array
      */
-    public function getTimers()
+    public function getTimers(): array
     {
         return $this->timers;
     }
@@ -91,14 +88,12 @@ class FileDestination implements ProfilerInterface
     /**
      * Useful when you need to send request data to the server immediately (for long running scripts)
      *
-     * @param string|null $scriptName
-     * @param int|null $flag
+     * @param string $scriptName
+     * @param int|null    $flag
      */
-    public function flush(?string $scriptName = null, ?int $flag = null): void
+    public function flush(string $scriptName, ?int $flag = null): void
     {
-        if ($scriptName) {
-            $this->setScriptName($scriptName);
-        }
+        $this->setScriptName($scriptName);
         $this->stopAllTimers();
     }
 }

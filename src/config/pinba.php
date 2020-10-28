@@ -1,5 +1,7 @@
 <?php
 
+/** @psalm-suppress UndefinedFunction */
+
 return [
 
     /*
@@ -22,7 +24,7 @@ return [
     |
     */
 
-    'pinba_hostname' => env('PINBA_HOSTNAME', gethostname()),
+    'pinba_hostname'   => env('PINBA_HOSTNAME', gethostname()),
 
     /*
     |--------------------------------------------------------------------------
