@@ -4,15 +4,9 @@ namespace Chocofamilyme\LaravelPinba\Profiler;
 
 use Illuminate\Support\Facades\Log;
 
-/**
- * @psalm-suppress UndefinedFunction
- */
 class PinbaDestination implements ProfilerInterface
 {
-    /**
-     * @var array
-     */
-    private $timers = [];
+    private array $timers = [];
 
     /**
      * PinbaDestination constructor.
@@ -50,14 +44,15 @@ class PinbaDestination implements ProfilerInterface
      * @param string $method
      * @param string $category
      *
+     * @psalm-suppress UndefinedFunction
      * @return int It's the timerId
      */
     public function startTimer(string $group, string $type, string $method, string $category): int
     {
         $tags = [
-            'group' => $group,
-            'type' => $type,
-            'method' => $method,
+            'group'    => $group,
+            'type'     => $type,
+            'method'   => $method,
             'category' => $category,
         ];
 
@@ -70,6 +65,8 @@ class PinbaDestination implements ProfilerInterface
 
     /**
      * Stop the timer by timerId
+     *
+     * @psalm-suppress UndefinedFunction
      *
      * @param int $timerId
      */
@@ -85,6 +82,8 @@ class PinbaDestination implements ProfilerInterface
 
     /**
      * Stop all timers
+     *
+     * @psalm-suppress UndefinedFunction
      */
     public function stopAllTimers(): void
     {
@@ -97,6 +96,8 @@ class PinbaDestination implements ProfilerInterface
      * is served by single script. With this method you can rewrite it
      *
      * @param string $url
+     *
+     * @psalm-suppress UndefinedFunction
      */
     public function setScriptName(string $url): void
     {
@@ -116,8 +117,11 @@ class PinbaDestination implements ProfilerInterface
     /**
      * Useful when you need to send request data to the server immediately (for long running scripts)
      *
-     * @param string $scriptName
+     * @param string   $scriptName
      * @param int|null $flag
+     *
+     * @psalm-suppress UndefinedFunction
+     * @psalm-suppress UndefinedConstant
      */
     public function flush(string $scriptName, ?int $flag = null): void
     {
