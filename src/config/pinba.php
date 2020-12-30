@@ -35,7 +35,7 @@ return [
     |
     */
 
-    'pinba_servername' => env('APP_NAME', $_SERVER['SERVER_NAME']),
+    'pinba_servername' => env('APP_NAME'),
 
 
     /*
