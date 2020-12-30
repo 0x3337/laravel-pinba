@@ -2,18 +2,19 @@
 
 namespace Chocofamilyme\LaravelPinba\Profiler;
 
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Facades\Log;
 
 class PinbaDestination implements ProfilerInterface
 {
     private array $timers = [];
 
-    /**
-     * PinbaDestination constructor.
-     */
-    public function __construct()
+    private Repository $config;
+
+    public function __construct(Repository $config)
     {
-        $this->initializePinba();
+        $this->config = $config;
+        $this->initialize();
     }
 
     /**
@@ -21,17 +22,17 @@ class PinbaDestination implements ProfilerInterface
      *
      * @psalm-suppress UndefinedFunction
      */
-    protected function initializePinba()
+    protected function initialize(): void
     {
-        if ($hostname = config('pinba.pinba_hostname')) {
+        if ($hostname = $this->config->get('pinba.pinba_hostname')) {
             pinba_hostname_set($hostname);
         }
 
-        if ($servername = config('pinba.pinba_servername')) {
+        if ($servername = $this->config->get('pinba.pinba_servername')) {
             pinba_server_name_set($servername);
         }
 
-        if ($schema = config('pinba.pinba_schema')) {
+        if ($schema = $this->config->get('pinba.pinba_schema')) {
             pinba_schema_set($schema);
         }
     }
