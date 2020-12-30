@@ -24,7 +24,7 @@ return [
     |
     */
 
-    'pinba_hostname'   => env('PINBA_HOSTNAME', gethostname()),
+    'pinba_hostname' => env('PINBA_HOSTNAME', gethostname()),
 
     /*
     |--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ return [
     |
     */
 
-    'pinba_servername' => config('app.name'),
+    'pinba_servername' => env('APP_NAME', $_SERVER['SERVER_NAME']),
 
 
     /*
@@ -47,5 +47,5 @@ return [
     |
     */
 
-    'pinba_schema' => env('PINBA_SCHEMA', null),
+    'pinba_schema' => env('PINBA_SCHEMA'),
 ];
