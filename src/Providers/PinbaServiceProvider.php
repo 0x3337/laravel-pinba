@@ -2,6 +2,7 @@
 
 namespace Chocofamilyme\LaravelPinba\Providers;
 
+use Chocofamilyme\LaravelPinba\Listeners\ProfileJob;
 use Chocofamilyme\LaravelPinba\Listeners\ProfileStartCommand;
 use Chocofamilyme\LaravelPinba\Middlewares\RightUrlMiddleware;
 use Chocofamilyme\LaravelPinba\Profiler\FileDestination;
@@ -108,6 +109,21 @@ class PinbaServiceProvider extends ServiceProvider
         Event::listen(
             \Illuminate\Console\Events\CommandStarting::class,
             ProfileStartCommand::class
+        );
+
+        Event::listen(
+            \Illuminate\Queue\Events\JobProcessing::class,
+            ProfileJob::class
+        );
+
+        Event::listen(
+            \Illuminate\Queue\Events\JobProcessed::class,
+            ProfileJob::class
+        );
+
+        Event::listen(
+            \Illuminate\Queue\Events\JobFailed::class,
+            ProfileJob::class
         );
     }
 
