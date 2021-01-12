@@ -19,6 +19,6 @@ final class ProfileStartCommand
     /** @psalm-suppress UndefinedClass */
     public function handle(CommandStarting $event)
     {
-        $this->profiler->setScriptName($event->command);
+        $this->profiler->setScriptName($event->command ?? 'list');
     }
 }
